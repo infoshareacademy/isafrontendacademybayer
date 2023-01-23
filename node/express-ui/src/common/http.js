@@ -18,7 +18,7 @@ export const http = {
     }
 
     return fetch(url, config)
-      .then(res => (res.status >= 400) ? Promise.reject(res) : res)
+      .then(res => (res.status >= 400) ? res.json().then(body => {res.data = body; return Promise.reject(res)}) : res)
       .then(res => res.json())
   },
 

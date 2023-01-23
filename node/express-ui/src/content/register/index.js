@@ -31,6 +31,10 @@ export const Register = () =>{
       }).then(() => {
         navigate('/sign-in')
       })
+      .catch(err => {
+          // TODO handle errors
+        console.log('REGISTER ERROR', err.data)  
+      })
 
   }
 
