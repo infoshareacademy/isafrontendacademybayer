@@ -1,14 +1,14 @@
 import { DataSource } from 'typeorm';
 import { Burger } from './entities/burger.entity';
+import 'dotenv/config';
 
 export const dataSource = new DataSource({
-
   type: 'postgres',
-  host: 'localhost',
-  port: 5433,
-  database: 'node_app',
-  username: 'postgres', 
-  password: 'admin',
+  host: process.env.DB_HOST,
+  port: parseInt(process.env.DB_PORT, 10),
+  database: process.env.DB_DATABASE,
+  username: process.env.DB_USERNAME, 
+  password: process.env.DB_PASSWORD,
   entities: [Burger],
   migrations: ["src/db/migrations/*.ts"],
 });
