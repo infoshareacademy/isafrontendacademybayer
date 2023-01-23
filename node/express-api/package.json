@@ -4,7 +4,7 @@
   "description": "Simple express.js app & TypeScript",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon",
+    "start": "nodemon",
     "build": "tsc",
     "typeorm": "typeorm-ts-node-commonjs -d ./src/db/data-source.ts",
     "migration:generate": "npm run typeorm migration:generate",
