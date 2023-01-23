@@ -28,8 +28,9 @@ export function authRoutes(app: Express) {
 
     // encode/hash password
     user.password = await bcrypt.hash(user.password, 10)
-    
+
     // create new user
+    await userRepository.save(user);
 
     // return status 200
     res.json(user);
