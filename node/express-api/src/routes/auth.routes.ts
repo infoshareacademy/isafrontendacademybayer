@@ -6,6 +6,7 @@ import * as jsonwebtoken from 'jsonwebtoken';
 import { LoginDto } from './auth.dto';
 import { validateMiddleware } from '../common/validate.middleware';
 import { auth, AuthRequest } from '../common/auth.middleware';
+import { config } from '../common/config';
 
 const userRepository = dataSource.getRepository(User);
 
@@ -65,7 +66,7 @@ export function authRoutes(app: Express) {
         userId: user.id,
       };
 
-      const token = jsonwebtoken.sign(payload, process.env.JWT_SECRET);
+      const token = jsonwebtoken.sign(payload, config.JWT_SECRET);
 
       // return user & token to the frontend
       res.json({

@@ -2,6 +2,7 @@ import { Request, Response, NextFunction } from "express";
 import { User } from "../db/entities/user.entity";
 import * as jsonwebtoken from 'jsonwebtoken';
 import { dataSource } from '../db/data-source';
+import { config } from "./config";
 
 export interface AuthRequest extends Request {
   user?: User;
@@ -23,7 +24,7 @@ export function auth() {
     // decode & validate the token
     let payload;
     try {
-      payload = jsonwebtoken.verify(token, process.env.JWT_SECRET);
+      payload = jsonwebtoken.verify(token, config.JWT_SECRET);
     } catch (error) {
       return res.status(401).end();
     }
@@ -38,7 +39,7 @@ export function auth() {
 
     // assign user to req.user property
     req.user = user;
-    
+
     next();
   }
 }
