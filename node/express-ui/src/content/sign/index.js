@@ -24,14 +24,12 @@ export const Sign = () => {
             email,
             password
         };
-        
-        // todo remove
-        login('token', data)
-        navigate('/')
 
         http.post('/auth/login', data).then((res) => {
             login(res.token, res.user);
             navigate('/')
+        }).catch(res => {
+            console.log('LOGIN ERROR', res.data);
         })
     }
 
