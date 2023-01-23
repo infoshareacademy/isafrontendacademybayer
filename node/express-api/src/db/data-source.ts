@@ -1,6 +1,7 @@
 import { DataSource } from 'typeorm';
 import { Burger } from './entities/burger.entity';
 import 'dotenv/config';
+import { User } from './entities/user.entity';
 
 export const dataSource = new DataSource({
   type: 'postgres',
@@ -9,7 +10,7 @@ export const dataSource = new DataSource({
   database: process.env.DB_DATABASE,
   username: process.env.DB_USERNAME, 
   password: process.env.DB_PASSWORD,
-  entities: [Burger],
+  entities: [Burger, User],
   migrations: ["src/db/migrations/*.ts"],
 });
 
