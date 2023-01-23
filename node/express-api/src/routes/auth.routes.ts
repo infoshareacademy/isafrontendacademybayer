@@ -5,7 +5,7 @@ import * as bcrypt from 'bcrypt';
 import * as jsonwebtoken from 'jsonwebtoken';
 import { LoginDto } from './auth.dto';
 import { validateMiddleware } from '../common/validate.middleware';
-import { auth, AuthRequest } from '../common/auth.middleware';
+import { auth } from '../common/auth.middleware';
 import { config } from '../common/config';
 
 const userRepository = dataSource.getRepository(User);
@@ -79,7 +79,7 @@ export function authRoutes(app: Express) {
   app.get(
     '/auth/me', 
     auth(),
-    async (req: AuthRequest, res) => {
+    async (req, res) => {
       
       res.json(req.user);
     }

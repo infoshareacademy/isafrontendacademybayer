@@ -4,14 +4,10 @@ import * as jsonwebtoken from 'jsonwebtoken';
 import { dataSource } from '../db/data-source';
 import { config } from "./config";
 
-export interface AuthRequest extends Request {
-  user?: User;
-}
-
 const userRepository = dataSource.getRepository(User);
 
 export function auth() {
-  return async (req: AuthRequest, res: Response, next: NextFunction) => {
+  return async (req: Request, res: Response, next: NextFunction) => {
 
     // extract jwt token from headers
     const token = req.headers.authorization;

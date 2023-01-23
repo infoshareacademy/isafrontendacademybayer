@@ -1,5 +1,5 @@
 import { Express } from 'express';
-import { auth, AuthRequest } from '../common/auth.middleware';
+import { auth } from '../common/auth.middleware';
 import { validateMiddleware } from '../common/validate.middleware';
 import { dataSource } from '../db/data-source';
 import { Burger } from '../db/entities/burger.entity';
@@ -12,7 +12,7 @@ export function burgersRoutes(app: Express) {
     '/burgers', 
     auth(), 
     validateMiddleware(Burger), 
-    async function(req: AuthRequest, res) {
+    async function(req, res) {
 
       const burger = req.body;
 
@@ -36,7 +36,7 @@ export function burgersRoutes(app: Express) {
   app.put('/burgers/:id', 
     auth(),
     validateMiddleware(Burger),
-    async function(req: AuthRequest, res) {
+    async function(req, res) {
       
       const id = parseInt(req.params.id, 10);
       const data = req.body;
@@ -58,7 +58,7 @@ export function burgersRoutes(app: Express) {
     }
   )
 
-  app.delete('/burgers/:id', auth(), async function(req: AuthRequest, res) {
+  app.delete('/burgers/:id', auth(), async function(req, res) {
     
     const id = parseInt(req.params.id, 10);
 
