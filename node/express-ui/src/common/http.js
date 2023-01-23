@@ -2,7 +2,7 @@
 const baseUrl = 'http://localhost:3333';
 
 export const http = {
-  token: '',
+
   fetch(url, options) {
 
     url = url?.substr(0,1) === '/' ? baseUrl+url : url;
@@ -12,14 +12,18 @@ export const http = {
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json',
-        'Authorization': this.token,
+        'Authorization': localStorage.getItem('token'),
         ...options?.headers,
       },
       body: JSON.stringify(options?.body)
     }
 
     return fetch(url, config)
-      .then(res => (res.status >= 400) ? res.json().then(body => {res.data = body; return Promise.reject(res)}) : res)
+      .then(res => 
+        (res.status >= 400) 
+        ? res.json().then(body => {res.data = body; return Promise.reject(res)}).catch(() => Promise.reject(res))
+        : res
+      )
       .then(res => res.json())
   },
 

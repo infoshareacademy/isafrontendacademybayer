@@ -1,4 +1,6 @@
 import { Express } from 'express';
+import { auth, AuthRequest } from '../common/auth.middleware';
+import { validateMiddleware } from '../common/validate.middleware';
 import { dataSource } from '../db/data-source';
 import { Burger } from '../db/entities/burger.entity';
 
@@ -6,20 +8,23 @@ const burgerRepository = dataSource.getRepository(Burger);
 
 export function burgersRoutes(app: Express) {
 
-  app.post('/burgers', async function(req, res) {
+  app.post(
+    '/burgers', 
+    auth(), 
+    validateMiddleware(Burger), 
+    async function(req: AuthRequest, res) {
 
-    const data = {
-      ...req.body
-    };
+      const burger = req.body;
 
-    const burger = burgerRepository.create(data);
+      burger.user = req.user;
+    
+      await burgerRepository.save(burger);
+    
+      res.json(burger);
+    }
+  );
   
-    await burgerRepository.save(burger);
-  
-    res.json(burger);
-  });
-  
-  app.get('/burgers', async function(req, res) {
+  app.get('/burgers', auth(), async function(req, res) {
 
     const burgers = await burgerRepository.find({
       order: {id: 'ASC'}

@@ -21,7 +21,6 @@ export const UserProvider = ({ children }) => {
     useEffect(() => {
         const token = localStorage.getItem('token');
         if(token) {
-            http.token = token;
             http.get('/auth/me').then(user => {
                 setUser(user);
             }).catch((res) => {
