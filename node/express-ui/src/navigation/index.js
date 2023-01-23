@@ -40,7 +40,10 @@ export const Navigation = () => {
               <Box sx={{ flexGrow: 1 }} />
               {
                 user 
-                    ? <Button color="inherit" onClick={handleLogout} >Logout</Button>
+                    ? <div>
+                        <span>{user.name}</span> 
+                        <Button color="inherit" onClick={handleLogout} >Logout</Button>
+                      </div>
                     : <div>
                       <Button color="inherit" component={Link} to="/sign-in">Login</Button>
                       <Button color="inherit" component={Link} to="/register">Register</Button>

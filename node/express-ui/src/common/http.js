@@ -12,6 +12,7 @@ export const http = {
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json',
+        'Authorization': this.token,
         ...options?.headers,
       },
       body: JSON.stringify(options?.body)

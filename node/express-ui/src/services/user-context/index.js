@@ -23,8 +23,12 @@ export const UserProvider = ({ children }) => {
         if(token) {
             http.token = token;
             http.get('/auth/me').then(user => {
-                setUser(user)
-            })
+                setUser(user);
+            }).catch((res) => {
+                if(res.status === 401) {
+                    logout();
+                }
+            }) 
         }
 
     }, []);

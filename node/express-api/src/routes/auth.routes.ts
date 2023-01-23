@@ -2,8 +2,10 @@ import { Express } from 'express';
 import { dataSource } from '../db/data-source';
 import { User } from '../db/entities/user.entity';
 import * as bcrypt from 'bcrypt';
+import * as jsonwebtoken from 'jsonwebtoken';
 import { LoginDto } from './auth.dto';
 import { validateMiddleware } from '../common/validate.middleware';
+import { auth, AuthRequest } from '../common/auth.middleware';
 
 const userRepository = dataSource.getRepository(User);
 
@@ -59,13 +61,26 @@ export function authRoutes(app: Express) {
       }
 
       // create jwt access token
-      const token = '';
+      const payload = {
+        userId: user.id,
+      };
+
+      const token = jsonwebtoken.sign(payload, process.env.JWT_SECRET);
 
       // return user & token to the frontend
       res.json({
         token,
         user,
       })
+    }
+  );
+
+  app.get(
+    '/auth/me', 
+    auth(),
+    async (req: AuthRequest, res) => {
+      
+      res.json(req.user);
     }
   );
 }
