@@ -4,12 +4,13 @@ import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import Badge from "react-bootstrap/Badge";
 import Table from "react-bootstrap/Table";
-import { State } from "../../store";
 import { createRemoveFromCartAction } from "../../state/shop-cart";
+import { shopCartSelector, getTotalValue } from "../../state/shop-cart.selectors";
 
 export const ShopCart = () => {
     const [show, setShow] = useState(false);
-    const productsInCart = useSelector((state: State) => state.shopCart);
+    const productsInCart = useSelector(shopCartSelector);
+    const totalValue = useSelector(getTotalValue)
     const dispatch = useDispatch();
 
     const handleClose = () => setShow(false);
@@ -17,11 +18,6 @@ export const ShopCart = () => {
 
     const handleRemove = (id: number) => {
         dispatch(createRemoveFromCartAction(id))
-    }
-
-    const getTotalValue = () => {
-        const productPrices = productsInCart.map(product => product.price);
-        return productPrices.reduce((total, price) => total + price, 0);
     }
 
     return (
@@ -53,7 +49,7 @@ export const ShopCart = () => {
                             }
                         <tr>
                             <td colSpan={2} style={{ textAlign: 'right'}}>
-                                {getTotalValue()}
+                                {totalValue}
                             </td>
                         </tr>
                         </tbody>
