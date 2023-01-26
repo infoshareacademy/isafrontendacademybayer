@@ -59,11 +59,7 @@ export const putBurger = createAsyncThunk(
 const burgerSlice = createSlice({
     name: 'burgers',
     initialState,
-    reducers: {
-        setBurgers: (state, action: PayloadAction<Burger[]>) => {
-            state.data = action.payload
-        }
-    },
+    reducers: {},
     extraReducers: (builder) => {
         builder
           .addCase(fetchBurgers.pending, (state) => {
