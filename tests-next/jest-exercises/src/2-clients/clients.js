@@ -20,5 +20,5 @@ export const getTotalValue = (client) => {
   };
 
 export const getTotalValues = (clients) => {
-    return cleints.reduce((acc, client) => acc + getTotalValue(client), 0)
+    return clients.reduce((acc, client) => acc + getTotalValue(client), 0)
 };
