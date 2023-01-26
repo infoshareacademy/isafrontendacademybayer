@@ -2,6 +2,7 @@ import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
 import { counter, CounterState } from './state/counter';
 import { rentalOffice, VHS } from './state/rental-office';
+import rentalOfficeToolkit from './state/rental-office-toolkit';
 import { shopCart, Product } from './state/shop-cart';
 
 export type State = {
@@ -12,7 +13,7 @@ export type State = {
 
 const reducers = combineReducers({
     counter,
-    rentalOffice,
+    rentalOffice: rentalOfficeToolkit, // change to rentalOffice for not toolkit version
     shopCart
 });
 

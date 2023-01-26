@@ -5,28 +5,33 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import { State } from '../store';
 import { createAddAction, createRemoveAction, createRentAction, createReturnAction } from '../state/rental-office';
+import { add, rent, remove, takeBack } from '../state/rental-office-toolkit';
 
 export const RentalOffice = () => {
     const elements = useSelector((state: State) => state.rentalOffice);
     const dispatch = useDispatch();
 
     const handleRemove = (id: number) => {
-        dispatch(createRemoveAction(id))
+        // dispatch(createRemoveAction(id))
+        dispatch(remove(id))
     }
 
     const handleRent = (id: number) => {
-        dispatch(createRentAction(id))
+        // dispatch(createRentAction(id))
+        dispatch(rent(id))
     }
 
     const handleReturn= (id: number) => {
-        dispatch(createReturnAction(id))
+        // dispatch(createReturnAction(id))
+        dispatch(takeBack(id))
     }
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         const data = new FormData(e.currentTarget);
         const newElementName = data.get('name');
-        dispatch(createAddAction(newElementName as string))
+        // dispatch(createAddAction(newElementName as string))
+        dispatch(add(newElementName as string))
     }
 
     return <>
