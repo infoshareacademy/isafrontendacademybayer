@@ -12,13 +12,15 @@ const initialState: CounterState = {
 };
 
 // ACTIONS
-const INCREMENT = 'INCREMENT';
-const DECREMENT = 'DECREMENT';
-const RESET = 'RESET';
-const SET_LOADING = 'SET_LOADING';
+export const INCREMENT = 'INCREMENT';
+export const INCREMENT_ASYNC = 'INCREMENT_ASYNC';
+export const DECREMENT = 'DECREMENT';
+export const DECREMENT_ASYNC = 'DECREMENT_ASYNC';
+export const RESET = 'RESET';
+export const SET_LOADING = 'SET_LOADING';
 
 type Action = {
-    type: typeof INCREMENT | typeof DECREMENT | typeof RESET | typeof SET_LOADING,
+    type: typeof INCREMENT | typeof DECREMENT | typeof RESET | typeof SET_LOADING | typeof INCREMENT_ASYNC | typeof DECREMENT_ASYNC,
     payload?: number
 }
 
@@ -55,6 +57,12 @@ export const createIncrementAction = (value?: number): Action => ({ type: INCREM
 export const createDecrementAction = (value?: number): Action => ({ type: DECREMENT, payload: value });
 export const createResetAction = (): Action => ({ type: RESET });
 export const createSetLoadingAction = (): Action => ({ type: SET_LOADING });
+
+// used for redux safa
+export const createIncrementSagaAction = (): Action => ({ type: INCREMENT_ASYNC });
+export const createDecrementSagaAction = (): Action => ({ type: DECREMENT_ASYNC });
+
+// redux thunk
 export const createAsyncIncrementAction = () => (dispatch: Dispatch) => {
     dispatch(createSetLoadingAction())
     setTimeout(() => {

@@ -8,7 +8,9 @@ import {
     createDecrementAction, 
     createResetAction,
     createAsyncIncrementAction,
-    createAsyncDecrementAction
+    createAsyncDecrementAction,
+    createIncrementSagaAction,
+    createDecrementSagaAction
 } from "../state/counter";
 import { State } from "../store";
 
@@ -36,6 +38,14 @@ export const Counter = () => {
         dispatch(createAsyncDecrementAction())
     }
 
+    const handleSagaIncrementClick = () => {
+        dispatch(createIncrementSagaAction())
+    }
+
+    const handleSagaDecrementClick = () => {
+        dispatch(createDecrementSagaAction())
+    }
+
     return <>
         <h1>Counter</h1>
         {isLoading ? <Spinner animation="border" /> : <h2>{value}</h2>}
@@ -47,6 +57,10 @@ export const Counter = () => {
         <ButtonGroup className="mt-3">
             <Button variant="warning" onClick={handleAsyncDecrementClick}>async -</Button>
             <Button variant="primary" onClick={handleAsyncIncrementClick}>async +</Button>
+        </ButtonGroup>
+        <ButtonGroup className="mt-3">
+            <Button variant="secondary" onClick={handleSagaDecrementClick}>saga -</Button>
+            <Button variant="info" onClick={handleSagaIncrementClick}>saga +</Button>
         </ButtonGroup>
     </>
 }
