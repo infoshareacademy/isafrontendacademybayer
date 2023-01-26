@@ -1,10 +1,10 @@
 import {useEffect} from 'react';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import Table from 'react-bootstrap/Table'
-import Button from 'react-bootstrap/Button'
 import Spinner from 'react-bootstrap/Spinner'
-import { fetchBurgers, deleteBurger } from './burgerSlice';
+import { fetchBurgers } from './burgerSlice';
 import { AddBurger } from './AddBurger';
+import { BurgerRow } from './BurgerRow';
 
 export const Burgers = () => {
     const dispatch = useAppDispatch();
@@ -14,10 +14,6 @@ export const Burgers = () => {
     useEffect(() => {
       dispatch(fetchBurgers());
     }, [dispatch]);
-
-    const handleRemove = (burgerId: string) => {
-        dispatch(deleteBurger(burgerId))
-    }
   
     return (
       <div className='d-flex flex-column align-items-center mt-3 mx-3'>
@@ -45,24 +41,7 @@ export const Burgers = () => {
                 <tbody>
                     {
                         burgers.map((burger) => (
-                            <tr key={burger.id}>
-                                <td>
-                                    <img 
-                                        src={burger.url || 'https://cdn-icons-png.flaticon.com/512/3075/3075977.png'}
-                                        style={{ width: '50px', height: '50px'}}
-                                        alt="burger"
-                                    />
-                                </td>
-                                <td>{burger.name}</td>
-                                <td>{burger.ingredients}</td>
-                                <td>{burger.price}</td>
-                                <td>
-                                    <Button variant="primary">Edit</Button>
-                                </td>
-                                <td>
-                                    <Button variant="danger" onClick={() => handleRemove(burger.id)}>Remove</Button>
-                                </td>
-                            </tr>
+                            <BurgerRow key={burger.id} burger={burger} />
                         ))
                     }
                 </tbody>
