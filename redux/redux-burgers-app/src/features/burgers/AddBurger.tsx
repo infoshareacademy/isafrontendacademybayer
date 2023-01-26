@@ -1,9 +1,12 @@
 import { useState, ChangeEvent } from 'react';
+import { useAppDispatch } from '../../app/hooks';
+import { postBurger } from './burgerSlice';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
 
 export const AddBurger = () => {
+    const dispatch = useAppDispatch();
     const [show, setShow] = useState(false);
     const [formData, setFormData] = useState({
         name: '',
@@ -22,7 +25,10 @@ export const AddBurger = () => {
         })
     }
     const handleSave = () => {
-        alert(formData)
+        dispatch(postBurger(formData))
+            .then(() => {
+                handleClose();
+            }) 
     }
 
     const { name, ingredients, price, url } = formData;

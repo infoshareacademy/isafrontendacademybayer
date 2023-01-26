@@ -1,7 +1,10 @@
-export type Burger = {
-    id: string;
+export interface BurgerData {
     name: string;
     ingredients: string;
-    price: number;
+    price: string;
     url?: string;
+}
+
+export interface Burger extends BurgerData {
+    id: string;
 }

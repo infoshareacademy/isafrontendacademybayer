@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
-import { Burger } from '../../app/types';
+import { Burger, BurgerData } from '../../app/types';
 
 export type BurgersState = {
     data: Burger[],
@@ -18,6 +18,18 @@ export const fetchBurgers = createAsyncThunk(
       const data = await response.json();
       const formattedData = Object.keys(data).map(key => ({ ...data[key], id: key }));
       return formattedData;
+    }
+  );
+
+export const postBurger = createAsyncThunk(
+    'burgers/postBurger',
+    async (burger: BurgerData, { dispatch }) => {
+      await fetch('https://rest-api-b6410.firebaseio.com/burgers.json', {
+        method: 'POST',
+        body: JSON.stringify(burger)
+      });
+
+      dispatch(fetchBurgers())
     }
   );
 
