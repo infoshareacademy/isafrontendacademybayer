@@ -33,6 +33,17 @@ export const postBurger = createAsyncThunk(
     }
   );
 
+export const deleteBurger = createAsyncThunk(
+    'burgers/postBurger',
+    async (burgerId: string, { dispatch }) => {
+      await fetch(`https://rest-api-b6410.firebaseio.com/burgers/${burgerId}.json`, {
+        method: 'DELETE',
+      });
+
+      dispatch(fetchBurgers())
+    }
+  );
+
 const burgerSlice = createSlice({
     name: 'burgers',
     initialState,

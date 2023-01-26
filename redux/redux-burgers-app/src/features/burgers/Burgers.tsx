@@ -3,7 +3,7 @@ import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import Table from 'react-bootstrap/Table'
 import Button from 'react-bootstrap/Button'
 import Spinner from 'react-bootstrap/Spinner'
-import { fetchBurgers } from './burgerSlice';
+import { fetchBurgers, deleteBurger } from './burgerSlice';
 import { AddBurger } from './AddBurger';
 
 export const Burgers = () => {
@@ -14,6 +14,10 @@ export const Burgers = () => {
     useEffect(() => {
       dispatch(fetchBurgers());
     }, [dispatch]);
+
+    const handleRemove = (burgerId: string) => {
+        dispatch(deleteBurger(burgerId))
+    }
   
     return (
       <div className='d-flex flex-column align-items-center mt-3 mx-3'>
@@ -56,7 +60,7 @@ export const Burgers = () => {
                                     <Button variant="primary">Edit</Button>
                                 </td>
                                 <td>
-                                    <Button variant="danger">Remove</Button>
+                                    <Button variant="danger" onClick={() => handleRemove(burger.id)}>Remove</Button>
                                 </td>
                             </tr>
                         ))
