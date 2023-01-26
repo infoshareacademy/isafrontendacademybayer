@@ -34,7 +34,7 @@ export const postBurger = createAsyncThunk(
   );
 
 export const deleteBurger = createAsyncThunk(
-    'burgers/postBurger',
+    'burgers/deleteBurger',
     async (burgerId: string, { dispatch }) => {
       await fetch(`https://rest-api-b6410.firebaseio.com/burgers/${burgerId}.json`, {
         method: 'DELETE',
@@ -55,6 +55,12 @@ const burgerSlice = createSlice({
     extraReducers: (builder) => {
         builder
           .addCase(fetchBurgers.pending, (state) => {
+            state.isLoading = true;
+          })
+          .addCase(postBurger.pending, (state) => {
+            state.isLoading = true;
+          })
+          .addCase(deleteBurger.pending, (state) => {
             state.isLoading = true;
           })
           .addCase(fetchBurgers.fulfilled, (state, action) => {
