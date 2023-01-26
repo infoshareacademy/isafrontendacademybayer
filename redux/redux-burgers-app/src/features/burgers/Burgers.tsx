@@ -4,6 +4,7 @@ import Table from 'react-bootstrap/Table'
 import Button from 'react-bootstrap/Button'
 import Spinner from 'react-bootstrap/Spinner'
 import { fetchBurgers } from './burgerSlice';
+import { AddBurger } from './AddBurger';
 
 export const Burgers = () => {
     const dispatch = useAppDispatch();
@@ -57,6 +58,7 @@ export const Burgers = () => {
                   }
               </tbody>
           </Table>
+          <AddBurger />
       </div>
     );
 }
