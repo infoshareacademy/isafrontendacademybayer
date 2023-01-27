@@ -50,6 +50,6 @@ describe('User', () => {
             </BrowserRouter>
         );
 
-        expect(screen.getByText('listitem')).toHaveTextContent('(48)');
+        expect(screen.getByRole('listitem')).toHaveTextContent('(48)');
     })
 })
