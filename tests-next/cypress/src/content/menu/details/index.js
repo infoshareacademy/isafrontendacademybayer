@@ -37,6 +37,7 @@ export const Details = () => {
         <Avatar 
             src={burger.url || 'https://cdn-icons-png.flaticon.com/512/3075/3075977.png'} 
             sx={{ width: '200px', height: '200px', margin: '20px 0' }} 
+            alt="burger"
         />
         <Typography>{burger.ingredients}</Typography>
         <Typography>{burger.price}</Typography>
