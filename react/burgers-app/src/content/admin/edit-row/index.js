@@ -26,9 +26,9 @@ export const EditRow = ({ burger, cancelEditMode, refresh }) => {
 
     const { name, ingredients, price } = formData;
 
-    return <TableRow>
+    return <TableRow onBlur={handleSave}>
         <TableCell>
-            <TextField fullWidth size="small" label="Name" name="name"
+            <TextField fullWidth size="small" label="Name" name="name" autoFocus
                 value={name} onChange={handleChange} />
         </TableCell>
         <TableCell>
