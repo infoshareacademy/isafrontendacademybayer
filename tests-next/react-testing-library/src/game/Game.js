@@ -29,12 +29,12 @@ export const Game = ({ name }) => {
     return (
         <>
             <Typography variant="h5">Welcome to the game {name}!</Typography>
-            <Typography variant="h4">Your number of points is: <Score isRed={points < 0}>{points}</Score>.</Typography>
+            <Typography variant="h4">Your number of points is: <Score data-testid="score" isRed={points < 0}>{points}</Score>.</Typography>
             <div>
-                <Button variant="contained" color="primary" onClick={increase}>
+                <Button aria-label="increase" variant="contained" color="primary" onClick={increase}>
                     <Icon>add</Icon>
                 </Button>
-                <Button variant="contained" color="error" onClick={decrease}>
+                <Button aria-label="decrease" variant="contained" color="error" onClick={decrease}>
                     <Icon>remove</Icon>
                 </Button>
             </div>
